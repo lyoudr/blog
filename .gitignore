@@ -1,0 +1,9 @@
+*_venv/
+*.env
+launch.json
+__pycache__
+ann-project.json
+*.db
+*.index
+*.pkl
+*.ipynb

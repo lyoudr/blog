@@ -1,0 +1,19 @@
+[
+    {
+      "billing_id": "BILL12345",
+      "user_id": "USER67890",
+      "amount": 199.99,
+      "currency": "USD",
+      "timestamp": "2025-04-14T12:00:00Z",
+      "status": "paid"
+    },
+    {
+      "billing_id": "BILL12346",
+      "user_id": "USER67891",
+      "amount": 299.99,
+      "currency": "USD",
+      "timestamp": "2025-04-14T12:05:00Z",
+      "status": "pending"
+    }
+  ]
+  
