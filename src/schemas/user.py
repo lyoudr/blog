@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class UserResponse(BaseModel):
@@ -9,6 +9,8 @@ class UserResponse(BaseModel):
     class Config:
         from_attribute = True
 
+class RegisterResponse(BaseModel):
+    status: str
 
 class Login(BaseModel):
     username: str

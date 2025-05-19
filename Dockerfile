@@ -13,6 +13,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # COPY the rest of the code 
 COPY . .
 
+# Set the GOOGLE_APPLICATION_CREDENTIALS env var
+ENV GOOGLE_APPLICATION_CREDENTIALS=/app/ann-project.json
+
 # Expose the port 
 EXPOSE 8000
 

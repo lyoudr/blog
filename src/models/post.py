@@ -26,6 +26,7 @@ class Post(Base):
     # Relationships
     user = relationship("User", back_populates="posts")
     images = relationship("Image", back_populates="post", cascade="all, delete-orphan")
+    videos = relationship("Video", back_populates="post", cascade="all, delete-orphan")
 
 
 class PostTag(Base):

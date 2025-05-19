@@ -77,7 +77,7 @@ def get_current_user(
             )
         
         user = user_repository.get_user_by_id(db, user_id)
-        if not user:
+        if not user or not user.is_verified:
             raise HTTPException(
                 detail="User not found.",
                 status_code=status.HTTP_401_UNAUTHORIZED

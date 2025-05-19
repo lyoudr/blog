@@ -17,7 +17,13 @@ class GoogleCloudStorage:
         destination_blob_name = f"uploads/{filename}"
         blob = self.bucket.blob(destination_blob_name)
         blob.upload_from_file(file_stream, content_type=content_type)
+        return destination_blob_name
 
+    def upload_blob_from_stream(self, file_obj, filename):
+        destination_blob_name = f"uploads/{filename}"
+        blob = self.bucket.blob(destination_blob_name)
+        file_obj.seek(0) # make sure pointer is at start
+        blob.upload_from_file(file_obj, rewind=True)
         return destination_blob_name
 
     def generate_signed_url(self, object_name: str, expiration_minutes: int = 15):

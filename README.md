@@ -1,0 +1,3 @@
+* This is a blog platform where users can share their personal experiences — whether positive or negative — and describe how they overcame challenges. Other users can follow these posts for inspiration and support.
+
+* In addition, users have the option to pay to speak with someone who resonates with their experience, offering an affordable alternative to traditional therapy. To enhance this, we leverage Large Language Models (LLMs) to analyze each post and user’s condition, helping to match them with the most suitable person to talk to.

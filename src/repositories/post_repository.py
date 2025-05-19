@@ -1,10 +1,17 @@
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
+from typing import List
 
 from src.models.post import Post
-from src.schemas.post import PostBase, PostResponse
-from src.utils.gcs import GoogleCloudStorage
+from src.schemas.post import PostBase
 
+def list_posts(db: Session):
+    posts = (
+        db.query(Post)
+        .order_by(Post.updated_time.desc())
+        .all()
+    )
+    return [] if not posts else posts
 
 def list_post_by_user_id(db: Session, user_id: int):
     posts = (
@@ -51,20 +58,7 @@ def get_post(
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
     
-    signed_urls = []
-    if post.images:
-        gcs = GoogleCloudStorage()
-        signed_urls = [gcs.generate_signed_url(img.url) for img in post.images]
-    
-    return PostResponse(
-        id=post.id,
-        title=post.title,
-        content=post.content,
-        user_id=post.user_id,
-        created_time=post.created_time,
-        updated_time=post.updated_time,
-        images=signed_urls
-    )
+    return post
 
 def delete_post(
     db: Session,
