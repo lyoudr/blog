@@ -1,16 +1,18 @@
+from fastapi import UploadFile
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from openai import OpenAI
 import numpy as np
 import faiss
 import os
 import pickle
+import base64
 
 from src.models.database import conn
 
 # Set your OpenAI API key
 client = OpenAI()
 
-
+# RAG (Retrieval-Augmented Generation) is a technique that combines
 class RetrievalAugmentedGeneration:
     def __init__(self, user_id):
         self.user_id = user_id
@@ -148,3 +150,32 @@ class RetrievalAugmentedGeneration:
         )
 
         return response.choices[0].message.content.strip()
+
+
+
+class ImageAnalysis:
+    # Function to encode the image
+    def encode_image(self, file: UploadFile):
+        return base64.b64encode(file.file.read()).decode("utf-8")
+    
+    def analyze_image(self, base64_image: str, question: str):
+        completion = client.chat.completions.create(
+            model="gpt-4.1",
+            messages=[
+                {
+                    "role": "user",
+                    "content":[
+                        {"type": "text", "text": question},
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:image/jpeg;base64,{base64_image}"
+                            }
+                        }
+                    ]
+                }
+            ]
+        )
+        return completion.choices[0].message.content
+    
+

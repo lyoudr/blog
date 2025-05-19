@@ -8,6 +8,7 @@ from sqlalchemy import (
     PrimaryKeyConstraint,
 )
 from sqlalchemy.orm import relationship
+from sqlalchemy.dialects.postgresql import JSON
 
 from src.models.database import Base
 
@@ -17,7 +18,7 @@ class Post(Base):
 
     id = Column(BigInteger, primary_key=True)
     title = Column(String(100), nullable=False)
-    content = Column(String(500), nullable=True)
+    content = Column(JSON, nullable=False)
     user_id = Column(BigInteger, ForeignKey("user.id"), nullable=False, index=True)
     created_time = Column(DateTime, server_default=func.now())
     updated_time = Column(DateTime, server_default=func.now(), onupdate=func.now())

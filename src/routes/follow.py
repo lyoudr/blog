@@ -33,5 +33,4 @@ def get_followers(user_id: int, db: Session = Depends(get_db)):
 @transaction
 def add_follow(payload: FollowBase, db: Session = Depends(get_db)):
     follow_repository.create_follow(db, payload)
-
     return FollowResponse(status="sccess")

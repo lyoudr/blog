@@ -9,6 +9,7 @@ class User(Base):
     id = Column(BigInteger, primary_key=True, index=True)
     name = Column(String, nullable=False)
     email = Column(String, unique=True, nullable=False)
+    password = Column(String, nullable=False)
     created_time = Column(DateTime, server_default=func.now())
     updated_time = Column(DateTime, server_default=func.now(), onupdate=func.now())
 

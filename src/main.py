@@ -8,6 +8,7 @@ from src.routes import (
     tag,
     follow,
     chatbot,
+    auth,
 )
 
 app = FastAPI(
@@ -19,6 +20,7 @@ app = FastAPI(
 # Add GZip middleware
 app.add_middleware(GZipMiddleware, minimum_size=500)
 
+app.include_router(auth.router)
 app.include_router(user.router)
 app.include_router(post.router)
 app.include_router(image.router)

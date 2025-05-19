@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 def transaction(func):
     @wraps(func)
-    def wrapper(*args, **kwargs):
+    async def wrapper(*args, **kwargs):
         db: Session = kwargs.get("db")
         if db is None:
             raise RuntimeError("Database session not found in function arguments")

@@ -18,7 +18,9 @@ class Settings(BaseSettings):
     DB_HOST: str = get_env("DB_HOST")
     DB_PORT: str = get_env("DB_PORT")
     GCS_BUCKET_NAME: str = get_env("GCS_BUCKET_NAME")
-
+    SECRET_KEY: str = get_env("SECRET_KEY")
+    ALGORITHM: str = get_env("ALGORITHM")
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = get_env("ACCESS_TOKEN_EXPIRE_MINUTES")
     model_config = SettingsConfigDict(env_prefix=".env")
 
 

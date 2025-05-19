@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db: 
+    image: postgres:14
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+  
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    environment:
+      ENV: ${ENV}
+      DATABASE_URL: ${DATABASE_URL}
+      GCS_BUCKET_NAME: ${GCS_BUCKET_NAME}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
