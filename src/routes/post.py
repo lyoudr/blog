@@ -29,6 +29,8 @@ def get_posts(
         content=post.content,  # Assuming content is a string
         user_id=post.user_id,
         user_name=post.user.name,
+        user_image=post.user.image_url,
+        orders=post.orders,
         created_time=post.created_time,
         updated_time=post.updated_time,
         images=[img.url for img in post.images]  # Passing raw image URLs to PostResponse
@@ -53,6 +55,8 @@ def get_posts_by_user_id(
         content=post.content,  # Assuming content is a string
         user_id=post.user_id,
         user_name=post.user.name,
+        user_image=post.user.image_url,
+        orders=post.orders,
         created_time=post.created_time,
         updated_time=post.updated_time,
         images=[img.url for img in post.images]  # Passing raw image URLs to PostResponse
@@ -98,6 +102,8 @@ def get_post(
         content=post.content,  # Assuming content is a string
         user_id=post.user_id,
         user_name=post.user.name,
+        user_image=post.user.image_url,
+        orders=post.orders,
         created_time=post.created_time,
         updated_time=post.updated_time,
         images=[img.url for img in post.images]  # Passing raw image URLs to PostResponse

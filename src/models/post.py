@@ -22,7 +22,7 @@ class Post(Base):
     user_id = Column(BigInteger, ForeignKey("user.id"), nullable=False, index=True)
     created_time = Column(DateTime, server_default=func.now())
     updated_time = Column(DateTime, server_default=func.now(), onupdate=func.now())
-
+    orders = Column(JSON, nullable=True)
     # Relationships
     user = relationship("User", back_populates="posts")
     images = relationship("Image", back_populates="post", cascade="all, delete-orphan")

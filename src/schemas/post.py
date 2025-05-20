@@ -21,6 +21,7 @@ class PostResponse(BaseModel):
     user_id: int
     user_name: str
     user_image: str
+    orders: List[str] = []
     images: Optional[List[str]] = []
     created_time: datetime
     updated_time: datetime
@@ -31,11 +32,16 @@ class PostResponse(BaseModel):
     @root_validator(pre=True)
     def generate_signed_urls(cls, values):
         """Generate signed URLs for images."""
-        images = values.get('images', [])
+        # Handle list of post images
+        gcs = GoogleCloudStorage()
 
+        images = values.get('images', [])
         if images:
-            gcs = GoogleCloudStorage()
             signed_urls = [gcs.generate_signed_url(img) for img in images]
             values['images'] = signed_urls
         
+        # Handle user image
+        user_image = values.get('user_image')
+        if user_image:
+            values['user_image'] = gcs.generate_signed_url(user_image)
         return values
